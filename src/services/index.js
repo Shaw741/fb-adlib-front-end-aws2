@@ -91,14 +91,12 @@ export const changePassword = async (payload) => {
   let result = {};
   try {
     const userid = await axios.get(
-      `http://localhost:8000/api/usermanager/`, //http://127.0.0.1:8000/api/usermanager/      
+      `http://localhost:8000/api/usermanager/`,
       { withCredentials: true }
     );
     console.log(userid.data.data);
-    console.log("---------------- payload",payload)
-    // console.log(payload);
     const res = await axios.put(
-      `http://localhost:8000/api/usermanager/${userid?.data?.data?.id}/`, //http://127.0.0.1:8000/api/usermanager/
+      `http://localhost:8000/api/usermanager/${userid?.data?.data?.id}/`, 
       payload,
       { withCredentials: true }
     );
@@ -116,7 +114,7 @@ export const getName =async()=>{
   let result = {};
   try {
     const res = await axios.get(
-      `http://localhost:8000/api/usermanager/`, //http://127.0.0.1:8000/api/usermanager/      
+      `http://localhost:8000/api/usermanager/`, 
       { withCredentials: true }
     );
     result = res.data.data || {};
@@ -134,14 +132,14 @@ export const changeName = async (payload) => {
   let result = {};
   try {
     const userid = await axios.get(
-      `http://localhost:8000/api/usermanager/`, //http://127.0.0.1:8000/api/usermanager/      
+      `http://localhost:8000/api/usermanager/`, 
       { withCredentials: true }
     );
     console.log(userid.data.data);
     console.log("---------------- payload",payload)
     console.log(payload);
     const res = await axios.put(
-      `http://localhost:8000/api/usermanager/${userid?.data?.data?.id}/`, //http://127.0.0.1:8000/api/usermanager/
+      `http://localhost:8000/api/usermanager/${userid?.data?.data?.id}/`, 
       payload,
       { withCredentials: true }
     );

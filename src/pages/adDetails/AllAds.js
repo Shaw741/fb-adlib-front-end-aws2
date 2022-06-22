@@ -1,4 +1,4 @@
-import React, { useEffect ,} from "react";
+import React from "react";
 import { Grid, Stack, Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,8 +7,6 @@ import Firstcardimg from "../../assets/FirstCardImg.svg";
 import Shareicon from "../../assets/Shareicon.svg";
 import Saveicon from "../../assets/Saveicon.svg";
 import Addgraph from "../../assets/Addgraph.svg";
-import { useDispatch , useSelector} from 'react-redux';
-import { loadMediaStart } from "../../redux/ducks/mediaAds";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -16,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
       "linear-gradient(270deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    // margin:
   },
   titleimage: {
     height: "37px !important",
@@ -54,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20px",
   },
   img: {
-    // maxWidth: "100%",
     width: "100%",
     height: "auto",
     padding: "0",
@@ -62,9 +58,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "none",
     outline: "none",
   },
-  Arrow: {
-    marginLeft: theme.spacing(1),
-  },
+
   shareicon: {
     marginLeft: theme.spacing(5),
   },
@@ -83,34 +77,22 @@ const useStyles = makeStyles((theme) => ({
       "linear-gradient(270deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
     float: "right",
   },
+  Addheader:{
+    display: "flex",
+    justifyContent: "space-evenly",
+    padding: "6px",
+    whiteSpace: "nowrap",
+  },
+  AddFooter:{
+    display: "flex",
+    flexWrap: "wrap",
+    whiteSpace: "nowrap",
+  }
 }));
 
-const Addheader = styled("div")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "space-evenly",
-  padding: "6px",
-  whiteSpace: "nowrap",
-}));
-
-const AddFooter = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexWrap: "wrap",
-  //   padding: "2px",
-  // marginLeft: "30px",
-  whiteSpace: "nowrap",
-}));
 
 const AllAds = () => {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const { media} = useSelector((state) => state.allMediaAds);
-
-  // useEffect(() => {
-	// 	dispatch(loadMediaStart);
-  //   console.log("???????????????????????????????????????????");
-  //   console.table(media);
-  //   console.log()
-	// }, [dispatch]);
 
   const adsList = [1, 2, 3, 4, 5, 6, 7];
   return (
@@ -123,7 +105,7 @@ const AllAds = () => {
               padding: "10px",
             }}
           >
-            <Addheader>
+            <Box className={classes.Addheader}>
               <Box sx={{ marginRight: "12px" }}>
                 <img src={Firstcard} aria-label="Add" />
               </Box>
@@ -149,14 +131,14 @@ const AllAds = () => {
               >
                 (21,604 likes)
               </Typography>
-            </Addheader>
+            </Box>
             <Box>
               <img src={Firstcardimg} alt="img1" className={classes.img} />
             </Box>
 
             <Grid container sx={{ padding: "4px" }}>
               <Grid item sm={9}>
-                <AddFooter>
+                <Box className={classes.AddFooter}>
                   <Typography>Active</Typography>
                   <img
                     src={Shareicon}
@@ -170,7 +152,7 @@ const AllAds = () => {
                   <Typography color="#2B2F42" className={classes.addinfo}>
                     Sollar Powered Butterfly Lights
                   </Typography>
-                </AddFooter>
+                </Box>
               </Grid>
               <Grid
                 item

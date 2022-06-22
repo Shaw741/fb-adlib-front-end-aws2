@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import {
@@ -10,12 +11,10 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
-import appLogo from "../../assets/appLogo.svg";
 import { Grid } from "@material-ui/core";
 import { Stack } from "@mui/material";
+import appLogo from "../../assets/appLogo.svg";
 import Backtologin from "../../assets/Backtologinicon.svg";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { forgotPassword, isAlive } from "../../services/index";
 
 const themeLight = createTheme({
@@ -72,7 +71,7 @@ const useStyles = makeStyles(() => ({
     color: "#F6F6FB",
     width: "60%",
   },
-  arrow: {
+  BackToLogInArrow: {
     height: "16px !important",
     width: "14px !important",
     margin: "2px",
@@ -91,20 +90,12 @@ const useStyles = makeStyles(() => ({
     cursor: "pointer",
   },
 }));
+
 const ForgetPassword = () => {
   const classes = useStyles();
-
-  // const [email,setEmail] = useState()
-
   const navigate = useNavigate();
 
-  // const [authState, setauthState] = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [errorMsg, setErrorMsg] = useState("");
-  // const [successMsg, setSuccessMsg] = useState("");
-  // const [invalid, setInvalid] = useState(false);
 
   const handlesubmit = async () => {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -112,28 +103,15 @@ const ForgetPassword = () => {
       const response = await forgotPassword({ email: userEmail });
       console.log(response);
       if (!response.success) {
-        // setErrorMsg(response.message.response.data.message);
         console.log(response.message.response.data.message);
-
-        // setInvalid(true);
       } else {
         console.log(response);
-        // setSuccessMsg(response.data.message);
       }
-      //   alert("Valid email address!");
       return true;
     } else {
-      // setErrorMsg("You have entered an invalid email address!");
       alert("You have entered an invalid email addre/ss!");
       return false;
     }
-  };
-
-  const test_str = () => {
-    var idx = userEmail.indexOf("@");
-    var res = userEmail.replace(userEmail.slice(5, idx), "*".repeat(5));
-    console.log(res);
-    return res;
   };
 
   const getAlive = async () => {
@@ -230,7 +208,7 @@ const ForgetPassword = () => {
                 >
                   <img
                     src={Backtologin}
-                    className={classes.arrow}
+                    className={classes.BackToLogInArrow}
                     alt="bactologin"
                   />
                   <Typography className={classes.Backtologinfont}>

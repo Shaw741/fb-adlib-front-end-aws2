@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Grid } from "@material-ui/core";
+import { Stack } from "@mui/material";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import {
@@ -13,16 +15,13 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 import appLogo from "../../assets/appLogo.svg";
-import { Grid } from "@material-ui/core";
-import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { usermanager } from "../../services/index";
 
 const Signup = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  // const [error, setError] = useState(null)
-  // const [loading,setLoading] = useState(false)
+
   const [firstname, setFirstname] = useState();
   const [lastname, setLasttname] = useState();
   const [email, setEmail] = useState();

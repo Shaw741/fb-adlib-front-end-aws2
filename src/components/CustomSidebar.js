@@ -32,9 +32,7 @@ const useStyles = makeStyles(() => ({
     width: "46px !important",
     marginRight: "8px",
   },
-  staricon: {
-    marginLeft: "20px",
-  },
+
   selectedMenu: {
     background:
       "linear-gradient(270deg, rgba(0, 203, 255, 0.5) 0%, rgba(0, 203, 255, 0.03) 100%)",
@@ -96,7 +94,7 @@ export const CustomSidebar = ({ isOpen }) => {
     sideBarMenuItems.ADLIBSDATABASE
   );
 
-  const userLogout =  async () => {
+  const userLogout = async () => {
     const res = await logoutUser();
     if (res.success && res?.data?.data) {
       localStorage.clear();
@@ -104,22 +102,17 @@ export const CustomSidebar = ({ isOpen }) => {
     }
   };
 
-useEffect(()=>{
-  if (
-    window.location.pathname === `/ContactSupport` 
-  ) {
-    setSelectedMenuItem(sideBarMenuItems.SUPPORT)
-  }else if(window.location.pathname === `/` )  
-  {
-    setSelectedMenuItem(sideBarMenuItems.ADLIBSDATABASE)
-  }
-  else if(window.location.pathname === `/savedAds` )  
-  {
-    setSelectedMenuItem(sideBarMenuItems.SAVEDADS)
-  }else{
-    setSelectedMenuItem('')
-  }
-})
+  useEffect(() => {
+    if (window.location.pathname === `/ContactSupport`) {
+      setSelectedMenuItem(sideBarMenuItems.SUPPORT);
+    } else if (window.location.pathname === `/`) {
+      setSelectedMenuItem(sideBarMenuItems.ADLIBSDATABASE);
+    } else if (window.location.pathname === `/savedAds`) {
+      setSelectedMenuItem(sideBarMenuItems.SAVEDADS);
+    } else {
+      setSelectedMenuItem("");
+    }
+  });
   return (
     <>
       <Drawer variant="permanent" open={isOpen}>
@@ -200,7 +193,7 @@ useEffect(()=>{
                 marginLeft: "20px",
               }}
             >
-              <img alt="staricon" src={staricon} />
+              <img alt="staricon" src={staricon} sx={{ marginLeft: "20px" }} />
               <Typography sx={{ marginLeft: "26px" }}>Saved Ads</Typography>
             </Stack>
           </Box>
@@ -260,7 +253,7 @@ useEffect(()=>{
               }}
               onClick={userLogout}
             >
-              <img alt="Logout" src={logout} width="17px"/>
+              <img alt="Logout" src={logout} width="17px" />
               <Typography sx={{ marginLeft: "26px" }}>Log Out</Typography>
             </Stack>
           </Box>

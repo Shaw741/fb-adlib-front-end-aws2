@@ -1,12 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-// import { Card } from "@material-ui/core";
 import { Button, Grid, InputBase } from "@mui/material";
 import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
-import { makeStyles } from "@material-ui/core/styles";
 import { contactSupport } from "../services";
-import { useNavigate } from "react-router-dom";
+import useStyles from "../css/mediapage";
 
 const ContactSupport = () => {
   const classes = useStyles();
@@ -19,23 +18,13 @@ const ContactSupport = () => {
   } = useForm();
 
   const onFormSubmit = async (data) => {
-    console.table("-----------------------", data);
     const response = await contactSupport({
       name: data.firstName,
       email: data.email,
-      message: data.Message
+      message: data.Message,
     });
-    // console.response(response);
-    if (!response.success) {
-      // setErrorMsg(response.message.response.data.message);
-      // navigate("/");
-      console.log(response.message.response.data.message);
-
-      // setInvalid(true);
-    } else {
-      console.log(response);
+    if (response.success) {
       navigate("/");
-      // setSuccessMsg(response.data.message);
     }
   };
 
@@ -60,7 +49,7 @@ const ContactSupport = () => {
             <Grid item xs={10} container spacing={2} margin={2}>
               <Grid xs={6} sm={6} lg={6} item>
                 <InputBase
-                  className={classes.fieldsStyle}
+                  className={classes.inputField}
                   label="outlined"
                   variant="outlined"
                   placeholder="Name"
@@ -78,9 +67,8 @@ const ContactSupport = () => {
 
               <Grid xs={6} sm={6} lg={6} item>
                 <InputBase
-                  className={classes.fieldsStyle}
+                  className={classes.inputField}
                   type="email"
-                  // required
                   label="outlined"
                   variant="outlined"
                   {...register("email", {
@@ -98,7 +86,6 @@ const ContactSupport = () => {
                 {errors.email?.message && (
                   <p style={{ color: "red" }}>Email is required.</p>
                 )}
-                {/* <span style={{ color: 'red' }}>{errors.email?.message}</span> */}
               </Grid>
 
               <Grid xs={12} item>
@@ -112,13 +99,10 @@ const ContactSupport = () => {
                   multiline
                   rows={10}
                   name="Message"
-                  // required
                 />
                 {errors.Message?.message && (
                   <p style={{ color: "red" }}>Message is required.</p>
                 )}
-
-                {/* <span style={{ color: 'red' }}>{errors.Message?.message}</span> */}
               </Grid>
 
               <Grid
@@ -143,95 +127,10 @@ const ContactSupport = () => {
           </form>
         </Box>
       </Box>
-      {/* <Box
-        clone
-        style={{ alignItems: "center", justifyContent: "center" }}
-        margin={5}
-      >
-        <Typography variant="h4">Contact Support</Typography>
-
-      
-        <Box width={"60%"} border={0.5} borderRadius={5} borderColor="#ebebeb">
-          <form onSubmit={handleSubmit(onFormSubmit)}>
-            <Grid item xs={10} container spacing={2} margin={2}>
-              <Grid xs={6} sm={6} lg={6} item>
-                <TextField
-                  label="Name"
-                  variant="outlined"
-                  fullWidth
-                  name="firstname"
-                  {...register("firstName", {
-                    required: "FirstName is required",
-                  })}
-                />
-              </Grid>
-
-              <Grid xs={6} sm={6} lg={6} item>
-                <TextField
-                  type={"email"}
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  // name="email"
-                  {...register("email", { required: "Email is required" })}
-                  borderRadius="10"
-                  // required
-                  name="email"
-                />
-              </Grid>
-
-              <Grid xs={12} item>
-                <TextField
-                  label="Message"
-                  multiline
-                  variant="outlined"
-                  borderColor="#EBEBEB"
-                  borderRadius={9}
-                  fullWidth
-                
-                  name="Message"
-                  {...register("Message", { required: "Message is required" })}
-                  rows={10}
-                />
-              </Grid>
-
-              <Grid
-                container
-                style={{ display: "flex", justifyContent: "right" }}
-                item
-              >
-                <Box justifyContent={"right "}>
-                  <Button
-                    type="Submit"
-                    variant="contained"
-                    color="primary"
-                    style={{ borderRadius: 50, backgroundColor: "#00CBFF" }}
-                  >
-                    Submit
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-          </form>
-        </Box>
-      </Box> */}
     </>
   );
 };
 
-const useStyles = makeStyles(() => ({
-  fieldsStyle: {
-    border: "2px solid #EBEBEB",
-    borderRadius: "10px",
-    height: "43px",
-    paddingLeft: "16px",
-  },
-  multilineinput: {
-    border: "2px solid #EBEBEB",
-    borderRadius: "10px",
-    height: "264px",
-    paddingLeft: "16px !important",
-  },
-}));
+
 
 export default ContactSupport;

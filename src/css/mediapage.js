@@ -1,30 +1,36 @@
-// import { makeStyles } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
 
-// const useStyles = makeStyles(() => ({
-//     title: {
-//       background:
-//         "linear-gradient(270deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
-//       WebkitBackgroundClip: "text",
-//       WebkitTextFillColor: "transparent",
-//       // margin:
-//     },
-//     titleimage: {
-//       height: "37px !important",
-//       width: "41px !important",
-//       marginRight: "10px",
-//     },
-//     staricon: {
-//       marginLeft: "20px",
-//     },
-//     libraryimg: {
-//       marginLeft: "20px",
-//     },
-//     img: {
-//       maxWidth: "100%",
-//       height: "auto",
-//       padding: "0",
-//       margin: "0",
-//     },
-//   }));
+const useStyles = makeStyles(() => ({
+  inputField: {
+    border: "2px solid #EBEBEB",
+    borderRadius: "10px",
+    paddingLeft: "16px",
+    height: "43px",
+  },
+  avtar: {
+    backgroundColor: "#00CBFF",
+    width: "34px",
+    height: "34px",
+    padding: "10px",
+    borderRadius: "50px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  multilineinput: {
+    border: "2px solid #EBEBEB",
+    borderRadius: "10px",
+    height: "264px",
+    paddingLeft: "16px !important",
+  },
+  AdsImageVideo: {
+    width: "100%",
+    height: "auto",
+    padding: "0",
+    margin: "0",
+    overflowY: "none",
+    outline: "none",
+  },
+}));
 
-//   export default useStyles;
+export default useStyles;

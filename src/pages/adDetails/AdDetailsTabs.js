@@ -1,23 +1,18 @@
-import { Button, Stack, Tab, Tabs } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { Button, Stack } from "@mui/material";
+import { Box } from "@mui/system";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import AllAds from "./AllAds";
 import AdDeatails from "./adDeatails";
 
-const adDetailsTabs = {
-  ADOVERVIEW: "Ad Overview",
-  ALLADS: "All Ads",
-};
-
 function AdDeatailsTabs() {
-  const [activeTab, setActiveTab] = React.useState(adDetailsTabs.ADOVERVIEW);
   const navigate = useNavigate();
-  const [isActiveTab, setIsActiveTab] = useState('Ad Overview');
-
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue);
+  const adDetailsTabs = {
+    ADOVERVIEW: "Ad Overview",
+    ALLADS: "All Ads",
   };
+  const [isActiveTab, setIsActiveTab] = useState(adDetailsTabs.ADOVERVIEW);
+
   return (
     <>
       <Box
@@ -36,49 +31,39 @@ function AdDeatailsTabs() {
           }}
         >
           <Stack direction={"row"} spacing={2}>
-            <Button disableRipple 
+            <Button
+              disableRipple
               sx={{
                 borderBottom: isActiveTab === "Ad Overview" ? 2 : 0,
                 height: "20px",
                 borderRadius: 0,
-                borderColor:"#2B2F42"
-                ,color:"#2B2F42"
+                borderColor: "#2B2F42",
+                color: "#2B2F42",
               }}
               onClick={() => {
-                setIsActiveTab('Ad Overview');
+                setIsActiveTab(adDetailsTabs.ADOVERVIEW);
                 navigate("");
               }}
             >
               Ad Overview
             </Button>
-            <Button disableRipple 
-              sx={{ borderBottom: isActiveTab === "All Ads" ? 2 : 0, height: "20px", borderRadius: 0 ,borderColor:"#2B2F42",color:"#2B2F42"}}
+            <Button
+              disableRipple
+              sx={{
+                borderBottom: isActiveTab === "All Ads" ? 2 : 0,
+                height: "20px",
+                borderRadius: 0,
+                borderColor: "#2B2F42",
+                color: "#2B2F42",
+              }}
               onClick={() => {
-                setIsActiveTab('All Ads');
-                navigate("allAds");                
+                setIsActiveTab(adDetailsTabs.ALLADS);
+                navigate("allAds");
               }}
             >
               All Ads
             </Button>
           </Stack>
-
-          {/* <Tabs value={activeTab} onChange={handleTabChange}>
-            <Tab
-              value={adDetailsTabs.ADOVERVIEW}
-              label="Ad Overview"
-              onClick={() => {
-                navigate("");
-              }}
-            />
-
-            <Tab
-              value={adDetailsTabs.ALLADS}
-              label="All Ads"
-              onClick={() => {
-                navigate("allAds");
-              }}
-            />
-          </Tabs> */}
         </Box>
       </Box>
       <Routes>

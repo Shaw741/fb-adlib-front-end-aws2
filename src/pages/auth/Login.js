@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import {
@@ -10,12 +10,11 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
-import appLogo from "../../assets/appLogo.svg";
 import { Grid } from "@material-ui/core";
 import { Stack } from "@mui/material";
+import appLogo from "../../assets/appLogo.svg";
 import { useNavigate } from "react-router-dom";
 import { isAlive, login } from "../../services/index";
-import { useEffect } from "react";
 
 const themeLight = createTheme({
   overrides: {
@@ -89,10 +88,11 @@ const useStyles = makeStyles(() => ({
 const Login = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const tkn = localStorage.getItem("is_alive");
-  console.log("::::::", tkn);
+
   const Loginuser = async () => {
     const data = {
       email: email,

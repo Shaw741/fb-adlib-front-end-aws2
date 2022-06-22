@@ -1,6 +1,4 @@
-// import { requestGetMedia } from "../requests/mediaAds";
 import { call, put } from 'redux-saga/effects';
-// import { loadMediaError, loadMediaSuccess } from "../../ducks/mediaAds";
 import { requestCreateSavedAds, requestDeleteSavedAds, requestGetSavedAds } from "../requests/savedAds";
 import { createSavedAdsError, createSavedAdsSuccess, deleteSavedAdsError, deleteSavedAdsSuccess, loadSavedAdsError, loadSavedAdsSuccess } from "../../ducks/saveAds";
 

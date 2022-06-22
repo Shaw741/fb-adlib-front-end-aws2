@@ -1,42 +1,31 @@
-import { Grid, Box, Typography, Button, Stack, Link } from "@mui/material";
+import { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Box, Typography, Button, Stack } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Firstcard from "../../assets/Firstcard.svg";
 import LargePageLogo from "../../assets/largePageLogo.svg";
 import Firsrcardimg from "../../assets/FirstCardImg.svg";
 import facebook from "../../assets/facebook.svg";
-// import instragram from "../../assets/instragram.svg";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import instragram from "../../assets/instragram.svg";
 
 function AdDeatails() {
   const classes = useStyles();
-  const { allMediaAds } = useSelector((state) => state.allMediaAds);
   const adID = useParams();
+  const { allMediaAds } = useSelector((state) => state.allMediaAds);
   const [adDetail, setAdDetail] = useState();
 
-  // const adDetail = allMediaAds.adID === adsID.adsId
-  // const [adDetail, setAdDetail] = useState();
-
   useEffect(() => {
-    console.log("...................." + adID.adsId);
     if (allMediaAds) {
       const singleAds = allMediaAds.find((ad) => {
-        console.log("ad va;li..." + ad.adID);
         if (ad.adID === adID.adsId) {
-          console.log("ad final  vali..." + ad.adID);
           return ad;
         }
       });
 
       setAdDetail(singleAds);
-      console.log("aksdji", adDetail);
-      console.log("single .......", singleAds);
     }
-    // setAdDetail(allMediaAds.find((ads) => ads.id === Number(adID.adsId)));
-    console.log(adID.adsId);
-  });
+  }, [allMediaAds, adID.adsId]);
   return (
     <>
       <Grid container sx={{ marginTop: "36px" }}>
@@ -77,28 +66,23 @@ function AdDeatails() {
                 </Typography>
               </Box>
 
-              <Box className={classes.box}>
+              <Box sx={{ width: "98%", height: "20%" }}>
                 {adDetail?.adMediaType === "video" ? (
                   <video
                     src={adDetail?.bucketMediaURL}
                     autoPlay
                     controls
-                    className={classes.img}
+                    className={classes.AdsImageVideo}
                   />
                 ) : adDetail?.adMediaType === "image" ? (
                   <img
                     src={adDetail?.bucketMediaURL}
                     alt="img1"
-                    className={classes.img}
+                    className={classes.AdsImageVideo}
                   />
                 ) : (
-                  <img src={Firsrcardimg} alt="img1" className={classes.img} />
+                  <img src={Firsrcardimg} alt="img1" className={classes.AdsImageVideo} />
                 )}
-                {/* <img
-                  src={Firsrcardimg}
-                  className={classes.adImage}
-                  alt="ad media"
-                /> */}
               </Box>
               <Box>
                 <Grid container spacing={1}>
@@ -138,8 +122,6 @@ function AdDeatails() {
                         {adDetail?.purchaseDescription
                           ? adDetail.purchaseDescription
                           : " "}
-                        {/* In Stock - Fast Delivery - 100% Satisfaction Guarantee -
-                        Limited Quantities Available - Hurry Before it is gone! */}
                       </Typography>
                     </Box>
                   </Grid>
@@ -183,8 +165,6 @@ function AdDeatails() {
                   </Grid>
                 </Grid>
               </Box>
-              {/* <Grid> */}
-              {/* <Stack direction={"row"} style={{ justifyContent: "end", alignContent: "end" }}> */}
               <Grid container justifyContent="flex-end">
                 <Button
                   style={{
@@ -249,9 +229,6 @@ function AdDeatails() {
                   {" "}
                   Download Video
                 </a>
-                {/* <Typography color={"white"} noWrap>
-                  Download Video
-                </Typography> */}
               </Button>
             </Grid>
             <Grid
@@ -283,14 +260,6 @@ function AdDeatails() {
                     <b>{ads}</b>
                   </Typography>
                 ))}
-                {/* <Typography //className={classes.textdeco}
-                  className={classes.textdeco}
-                >
-                  <b>Facebook</b>
-                </Typography> */}
-                {/* <Typography className={classes.textdeco}>
-                  <b>Instagram</b>
-                </Typography> */}
               </Stack>
             </Grid>
             <Grid
@@ -317,10 +286,7 @@ function AdDeatails() {
                   <img src={LargePageLogo} aria-label="Add" />
                 </Box>
               </Stack>
-              <Stack
-                style={{ justifyContent: "center", marginTop: "36px" }}
-                // spacing={3}
-              >
+              <Stack style={{ justifyContent: "center", marginTop: "36px" }}>
                 <Stack direction={"row"} sx={{ marginBottom: "16px" }}>
                   <Box sx={{ marginRight: "10px" }}>
                     <img src={facebook} aria-label="Add" />
@@ -378,18 +344,8 @@ function AdDeatails() {
 export default AdDeatails;
 
 const useStyles = makeStyles(() => ({
-  // adImage: {
-  //   objectFit: "contain",
-  //   resizeMode: "Startch",
-  //   height: "100%",
-  //   width: "100%",
-  //   padding: "12px",
-  // },
-  box: {
-    width: "98%",
-    height: "20%",
-  },
-  img: {
+ 
+  AdsImageVideo: {
     objectFit: "contain",
     resizeMode: "Startch",
     height: "100%",

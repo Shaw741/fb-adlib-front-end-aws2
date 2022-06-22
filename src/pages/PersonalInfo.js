@@ -1,19 +1,8 @@
-import { Box, Button, Grid, InputBase, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+import { Box, Button, Grid, InputBase, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
+import useStyles from "../css/mediapage";
 import { changeName, getName } from "../services";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(() => ({
-  inputField: {
-    border: "2px solid #EBEBEB",
-    borderRadius: "10px",
-    // height: "43px",
-    paddingLeft: "16px",
-    // width: "43px",//{ md: "43px", sm: "43px" ,lg:"43px"},
-    height: "43px", //{ md: "43px", sm: "43px" ,lg:"43px"},
-  },
-}));
 
 const PersonalInfo = () => {
   const classes = useStyles();
@@ -34,7 +23,6 @@ const PersonalInfo = () => {
     }
   };
   const onFormChangeNameSubmit = async (data) => {
-    console.log("-----------------------", data);
 
     const response = await changeName({
       first_name: data?.first_name,
@@ -42,14 +30,13 @@ const PersonalInfo = () => {
     });
 
     if (!response.success) {
-      console.log(response.message.response.data.message);
       errors.currentPassword.message = "password not mached";
     } else {
-      console.log(response);
     }
   };
   useEffect(() => {
     getname();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Box>
@@ -93,7 +80,6 @@ const PersonalInfo = () => {
                   {...register("last_name", {
                     required: "lastname is required",
                   })}
-                  // error={this.state.errors ? true : false}
                   name="last_name"
                   fullWidth
                 />
@@ -103,7 +89,6 @@ const PersonalInfo = () => {
               </Stack>
             </Stack>
             <Stack direction={"row"} marginTop={2}>
-              {/* <Button variant="contained">submit</Button> */}
               <Grid
                 container
                 style={{ display: "flex", justifyContent: "right" }}
@@ -118,7 +103,6 @@ const PersonalInfo = () => {
                       borderRadius: 50,
                       backgroundColor: "#00CBFF",
                     }}
-                    // onClick={onFormChangeNameSubmit}
                   >
                     Save
                   </Button>
