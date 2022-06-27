@@ -192,13 +192,14 @@ function AdDeatails({ ThumbnailData }) {
                   paddingLeft: "16px",
                   paddingRight: "16px",
                 }}
+                disabled={ThumbnailData?.adMediaType === "image" ? false : true}
               >
                 <a
                   href={ThumbnailData?.bucketMediaURL}
                   style={{ textDecoration: "none", color: "white" }}
                   download
                   disabled={
-                    ThumbnailData?.adMediaType === "image" ? true : false
+                    ThumbnailData?.adMediaType === "image" ? false : true
                   }
                 >
                   {" "}
@@ -214,7 +215,7 @@ function AdDeatails({ ThumbnailData }) {
                   paddingLeft: "16px",
                   paddingRight: "16px",
                 }}
-                disabled={ThumbnailData?.adMediaType === "video" ? true : false}
+                disabled={ThumbnailData?.adMediaType === "video" ? false : true}
               >
                 <a
                   href={ThumbnailData?.bucketMediaURL}

@@ -29,7 +29,8 @@ import { format } from "date-fns";
 
 import { addDays } from "date-fns";
 import ThumbNailBox from "../components/ThumbNailBox";
-import { object } from "yup";
+import { useDispatch } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     background:
@@ -127,11 +128,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Addlibrarydatabase = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const { allMediaAds, loading } = useSelector((state) => state.allMediaAds);
-  const [adsFilteredData, setAdsFilteredData] = useState([]);
-  // const [filterAll, setFilterAll] = useState([]);
 
+  const [adsFilteredData, setAdsFilteredData] = useState([]);
+
+  // const { savedAds } = useSelector((state) => state.savedAds);
+  const { savedIds } = useSelector(
+    (state) => state.savedclienads
+  );
   const [appliedFilters, setAppliedFilters] = useState({
     StartRunningDate: { startdate: "", enddate: "", Message: "" },
     AdStatus: { status: "", Message: "" },
@@ -150,8 +156,11 @@ const Addlibrarydatabase = () => {
   const [adStatusAnchorel, setAdStatusAnchorel] = React.useState(null);
   const openAdStatusAnchorel = Boolean(adStatusAnchorel);
 
+  // useEffect(() => {
+  //   dispatch(loadSavedAdsClientSideStart(savedAds));
+  // },[dispatch, savedAds]);
   useEffect(() => {
-    setAdsFilteredData([...allMediaAds]);
+    setAdsFilteredData(allMediaAds[1]?.all_ads);
   }, [allMediaAds]);
 
   const counterIncremten = (event, newValue) => {
@@ -763,13 +772,13 @@ const Addlibrarydatabase = () => {
                           }));
 
                           setAdsFilteredData(() => allMediaAds);
-                          console.log(
-                            "???????????????????????????????????????????????????"
-                          );
-                          console.log(adsFilteredData);
-                          console.log(
-                            "???????????????????????????????????????????????????"
-                          );
+                          // console.log(
+                          //   "???????????????????????????????????????????????????"
+                          // );
+                          // console.log(adsFilteredData);
+                          // console.log(
+                          //   "???????????????????????????????????????????????????"
+                          // );
                         });
                       }}
                     >
@@ -925,8 +934,13 @@ const Addlibrarydatabase = () => {
               disabled: loading ? true : false,
             }}
           >
-            {adsFilteredData.map((ads, index) => (
-              <ThumbNailBox adInfo={ads} index={index} key={index} />
+            {adsFilteredData?.map((ads, index) => (
+              <ThumbNailBox
+                adInfo={ads}
+                index={index}
+                deleteId={savedIds?.includes(ads.adID) ? ads.adID : false}
+                key={index}
+              />
             ))}
           </Grid>
         </Grid>

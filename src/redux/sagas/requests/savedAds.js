@@ -5,6 +5,8 @@ export function requestGetSavedAds() {
 }
 
 export function requestCreateSavedAds(SavedAds) {
+  console.log("????????????????????????????????++++++++++++++++++++++===================")
+  console.log(SavedAds)
   return axiosInstance.post("api/saveadmanager/", SavedAds, {
     withCredentials: true,
   });

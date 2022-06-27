@@ -55,7 +55,7 @@ export const deleteSavedAdsError = (error) => ({
 });
 
 const initialState = {
-  savedAds: [],
+  savedAds: [],  
   loading: false,
   error: "",
 };
@@ -73,13 +73,13 @@ const savedAdsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        savedAds: action.payload,
+        savedAds: action.payload,        
       };
     case CREATE_SAVEADS_SUCCESS:
       return {
         ...state,
         loading: false,
-        savedAds: [...state.savedAds.concat(action.payload)],
+        savedAds: [...state.savedAds.concat(action.payload)],        
       };
     case LOAD_SAVEADS_ERROR:
     case CREATE_SAVEADS_ERROR:
@@ -92,7 +92,7 @@ const savedAdsReducer = (state = initialState, action) => {
         return {
           ...state,
           loading: false,
-          savedAds: state.savedAds.filter((savedads) => savedads.id !== action.payload.deleted_id),
+          savedAds: state.savedAds.filter((savedads) => savedads.adID !== action.payload.deleted_id),
         };
       }
     default:

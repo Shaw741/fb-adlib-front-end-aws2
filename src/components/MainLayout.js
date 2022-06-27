@@ -15,6 +15,8 @@ import { loadSavedAdsStart } from "../redux/ducks/saveAds";
 import { CustomAppBar } from "../components/CustomAppBar";
 import { CustomSidebar } from "../components/CustomSidebar";
 import { loadAccountSettingsStart } from "./../redux/ducks/accountSettings";
+import { loadSavedAdsClientSideStart } from "../redux/ducks/saveAds_clientSide";
+import { useSelector } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -26,15 +28,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const MainLayout = () => {
   const dispatch = useDispatch();
+  const { savedAds } = useSelector((state) => state.savedAds);
 
   const [isOpen, setIsOpen] = React.useState(false);
 
   useEffect(() => {
     dispatch(loadMediaStart());
-    dispatch(loadSavedAdsStart());
+    dispatch(loadSavedAdsStart());    
     dispatch(loadAccountSettingsStart());
   }, [dispatch]);
-
+useEffect(()=>{
+  dispatch(loadSavedAdsClientSideStart(savedAds))
+},[dispatch,savedAds])
   return (
     <>
       <Box sx={{ display: "flex" }}>

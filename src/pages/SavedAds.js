@@ -1,17 +1,20 @@
 import React from "react";
 import { CircularProgress, Grid } from "@mui/material";
-
 import { useSelector } from "react-redux";
 
 import ThumbNailBox from "../components/ThumbNailBox";
 import { Box } from "@mui/system";
+// import { loadSavedAdsStart } from "../redux/ducks/saveAds";
 
 const SavedAds = () => {
-  const { savedAds, loading } = useSelector((state) => state.savedAds);
+  const { savedAdsLocal } = useSelector(
+    (state) => state.savedclienads
+  );
+  // const { savedAds, loading } = useSelector((state) => state.savedAds);
 
   return (
     <>
-      <Box
+      {/* <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <CircularProgress
@@ -24,31 +27,25 @@ const SavedAds = () => {
             visibility: loading ? "visible" : "hidden",
           }}
         />
-      </Box>
+      </Box> */}
 
       <Grid
         container
         spacing={2}
         sx={{
           marginTop: "10px",
-          opacity: loading ? 0.5 : 1,
-          disabled: loading ? true : false,
+          // opacity: loading ? 0.5 : 1,
+          // disabled: loading ? true : false,
         }}
       >
-        {savedAds.map(
-          (ads, index) => (
-            console.log("------------------ads.id ---------------" + ads.id),
-            console.log(ads.id),
-            (
-              <ThumbNailBox
-                adInfo={ads}
-                index={index}
-                key={index}
-                deleteId={ads.id}
-              />
-            )
-          )
-        )}
+        {savedAdsLocal.map((ads, index) => (
+          <ThumbNailBox
+            adInfo={ads}
+            index={index}
+            key={index}
+            deleteId={ads.adID}
+          />
+        ))}
       </Grid>
     </>
   );

@@ -16,7 +16,7 @@ const AllAds = ({ AdsName }) => {
           style={{
             position: "relative",
             top: 50,
-            left: 50,
+            left: 40,
             opacity: 1,
             zIndex: 1,
             visibility: loading ? "visible" : "hidden",

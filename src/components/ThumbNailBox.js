@@ -13,6 +13,11 @@ import Shareicon from "../assets/Shareicon.svg";
 import Saveicon from "../assets/Saveicon.svg";
 import Addgraph from "../assets/Addgraph.svg";
 import StarFill from "../assets/StarFill.svg";
+import {
+  createSavedAdsClientSideStart,
+  deleteSavedAdsClientSideStart,
+  deleteSavedAdsClientSideSuccess,
+} from "../redux/ducks/saveAds_clientSide";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -113,9 +118,6 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-//   console.log("??????????????????")
-// console.log(deleteId);
-// console.log("??????????????????")
 
   return (
     <Grid item xs={4} key={index}>
@@ -190,7 +192,8 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
                   alt="StarFill"
                   className={classes.saveicon}
                   onClick={() => {
-                    dispatch(deleteSavedAdsStart({ deleted_id: deleteId }));
+                    dispatch(deleteSavedAdsClientSideStart(adInfo));
+                    dispatch(deleteSavedAdsStart({ deleted_id: adInfo?.adID }));
                   }}
                 />
               ) : (
@@ -199,8 +202,12 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
                   alt="Saveicon"
                   className={classes.saveicon}
                   onClick={() => {
+                    console.log(adInfo);
+                    console.log("******************************************");
+                    dispatch(
+                      createSavedAdsClientSideStart({ ad: adInfo.adID })
+                    );
                     dispatch(createSavedAdsStart({ ad: adInfo.adID }));
-                    //   deleteSavedAdsStart({ id: Number(ads.deleteId) })
                   }}
                 />
               )}
@@ -273,21 +280,23 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
             className={classes.AdsImageVideo}
           />
         </Box>
-        <Button
-          variant="contained"
-          size="small"
-          sx={{
-            borderRadius: "17px",
-            background:
-              "linear-gradient(270deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
-            float: "right",
-          }}
-          onClick={() => {
-            navigate(`/adDeatails/${adInfo.adID}`);
-          }}
-        >
-          see Details
-        </Button>
+        <Box>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              borderRadius: "17px",
+              background:
+                "linear-gradient(270deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
+              float: "right",
+            }}
+            onClick={() => {
+              navigate(`/adDeatails/${adInfo.adID}`);
+            }}
+          >
+            see Details
+          </Button>
+        </Box>
       </Stack>
     </Grid>
   );
