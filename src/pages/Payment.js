@@ -1,12 +1,10 @@
-import { Button, Divider, Grid, Stack, Typography } from '@mui/material'
+import { Button, CircularProgress, Divider, Grid, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import paymentCheckboxicon from "../../src/assets/paymentcheckboxicon.svg"
 import annualplancheckboxicon from "../../src/assets/annualplancheckbox.svg"
-import axios from "axios";
-// import "../../css/Test.css"
-// const stripePromise = loadStripe("pk_test_51LEWIvSBF9T0wchr0wNjjDM8Hvf7PbVgiZMBNHNTZ6m4DFp0nWQORgK9dCYYCwmgKcmy802jWKxqlLZM0xaRRvVE00MDtwFO5X");
+import { monthsubscription,yearsubcription } from '../services';
 const useStyles = makeStyles((theme) => ({
     fontSizeCustomize: {
         [theme.breakpoints.up("minWidth: 1140px")]: {
@@ -67,12 +65,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Payment = () => {
     const classes = useStyles()
-    const buySubscription = async () => {
-        const response = await axios("http://localhost:4242/create-checkout-session", { method: "post" })
-            .then((res) => console.log(res))
-            .catch((error) => console.log(error))
-        console.log("+++++++++++++++++++++++++++++++", response)
-        // navigate("/CheckoutForm")
+    const [loading, setLoading] = useState(false)
+    const [loadingyear, setLoadingyear] = useState(false)
+    const buySubscriptionmonthly = async () => {
+        setLoading(true);
+        try {
+            const res = await monthsubscription();
+            window.open(res.data.data.url)
+        } catch {
+            setLoading(false)
+        }
+    }
+    const buySubscriptionAnnually = async () => {
+        setLoadingyear(true);
+        try {
+            const res = await yearsubcription();
+            window.open(res.data.data.url)
+        } catch {
+            setLoadingyear(false)
+        }
     }
     return (
         <>
@@ -132,14 +143,14 @@ const Payment = () => {
                             <Button
                                 variant="outlined"
                                 className={classes.chooseplanbutton}
-                                onClick={buySubscription}
+                                onClick={buySubscriptionmonthly}
                                 style={{
                                     borderRadius: 30,
                                     fontSize: 22,
                                     borderColor: "#EBEBEB",
                                     textTransform: "none",
                                 }}>
-                                Choose Plan
+                                {loading ? <CircularProgress size={25} style={{ color: "#00CBFF" }} /> : "Choose Plan"}
                             </Button>
                         </Box>
                     </Stack>
@@ -209,9 +220,10 @@ const Payment = () => {
                                 variant="contained"
                                 size="large"
                                 className={classes.yearplanbutton}
+                                onClick={buySubscriptionAnnually}
                                 sx={{ borderRadius: 30, fontSize: 22, textTransform: "none", }}
                             >
-                                Choose Plan
+                                {loadingyear ? <CircularProgress size={25} style={{ color: "#F6F6FB" }} /> : "Choose Plan"}
                             </Button >
                         </Box >
                     </Stack>

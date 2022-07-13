@@ -6,15 +6,14 @@ import viss from "../assets/viss.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAccountSettingsStart } from "../redux/ducks/accountSettings";
 import useStyles from "../css/mediapage";
-
-
+import { cancelusersubcription, getCarddetails } from "../services/index";
 
 function AccountSettings() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  
-  const { accountSettings } = useSelector((state) => state.accountSettings);
 
+  const { accountSettings } = useSelector((state) => state.accountSettings);
+  const [usercardInfo, setusercardInfo] = React.useState([])
   const {
     register: personalFormRegister,
     handleSubmit: personalFormHandleSubmit,
@@ -41,8 +40,9 @@ function AccountSettings() {
 
   useEffect(() => {
     console.log("accountSettings ::", accountSettings);
-    personalFormSetValue("first_name", accountSettings.first_name);
-    personalFormSetValue("last_name", accountSettings.last_name);
+    personalFormSetValue("first_name", accountSettings?.first_name);
+    personalFormSetValue("last_name", accountSettings?.last_name);
+    getData()
   }, [accountSettings, personalFormSetValue]);
 
 
@@ -82,6 +82,18 @@ function AccountSettings() {
     // }
   };
 
+  const getData = async () => {
+    const res = await getCarddetails();
+    console.log("first----------------------", res);
+    setusercardInfo(res)
+  }
+  console.log("444444444444", usercardInfo.last4)
+  const cancelSubscription = () => {
+    const res = cancelusersubcription()
+     if(res.success){
+      getData()
+     }
+  }
   return (
     <>
       <Stack marginLeft={5}>
@@ -89,7 +101,7 @@ function AccountSettings() {
           <b>Account Settings</b>
         </Typography>
 
-        <Stack width="80%" direction={"column"} marginTop={8}>
+        <Stack width="80%" direction={"column"} marginTop={5}>
           <Box>
             <Typography variant="h6">Personal Information</Typography>
             <Box
@@ -253,7 +265,6 @@ function AccountSettings() {
               </Stack>
             </Box>
           </Box>
-
           <Box marginTop={5}>
             <Typography variant="h6">Billing</Typography>
             <Box
@@ -288,7 +299,10 @@ function AccountSettings() {
                           />
                         </Typography>
                         <Typography style={{ marginLeft: 3 }}>
-                          <b>Visa ending in 4436</b>
+                          {/* {usercardInfo[card].map((newcard,id)=> */}
+                          <b>Visa ending in {usercardInfo.last4}</b>
+
+
                         </Typography>
                       </Stack>
                     </Stack>
@@ -340,19 +354,19 @@ function AccountSettings() {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Stack direction={"column"}>
-                    <Typography variant="h6">
+                    <Typography >
                       Subscription Status:
-                      <b>true</b>
+                      <b>{usercardInfo.status}</b>
                     </Typography>
                   </Stack>
                   <Stack direction={"column"}>
                     <Typography>
-                      Plan:<b>PRO</b>
+                      Plan:<b>{usercardInfo.plan_type}</b>
                     </Typography>
                   </Stack>
                   <Stack direction={"column"}>
                     <Typography>
-                      Next Renew:<b>May 20,2022</b>
+                      Next Renew:<b>{usercardInfo.end_date}</b>
                     </Typography>
                   </Stack>
                   <Stack direction={"column"}>
@@ -370,8 +384,9 @@ function AccountSettings() {
                             borderRadius: 50,
                             backgroundColor: "#00CBFF",
                           }}
+                          onClick={cancelSubscription}
                         >
-                          Change Payment Method
+                          Cancel Subscription
                         </Button>
                       </Box>
                     </Grid>
