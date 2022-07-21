@@ -1,4 +1,4 @@
-import { all, fork, takeLatest } from "redux-saga/effects";
+import { all, fork, takeEvery, takeLatest } from "redux-saga/effects";
 import { LOAD_MEDIA_START } from "../ducks/mediaAds";
 // import {
 //   CREATE_SAVEADS_START,
@@ -33,7 +33,7 @@ import { LOAD_SUBSCRIPTION_START } from "../ducks/subscription";
 import { requestSearchPhraseData } from "./requests/searchBar";
 
 function* onLoadMeida() {
-  yield takeLatest(LOAD_MEDIA_START, handleGetMedia);
+  yield takeEvery(LOAD_MEDIA_START, handleGetMedia);
 }
 
 function* onLoadIsAlive() {

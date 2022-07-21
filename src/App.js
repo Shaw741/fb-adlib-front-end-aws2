@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import {   useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Pagenotfound from "./components/PageNotFound";
 import PrivateRoute from "./PrivateRoute";
@@ -9,6 +9,12 @@ import ForgetPassword from "./pages/auth/ForgetPassword";
 import Signup from "./pages/auth/Signup";
 import PublicRoute from "./PublicRoute";
 import './App.scss'
+import {
+  // BrowserRouter as Router,
+  Switch,
+  Route,
+  // Link
+} from "react-router-dom";
 // import { loadIsAliveStart } from "./redux/ducks/session";
 // import {
 //   Box,
@@ -26,7 +32,7 @@ const App = () => {
   
   return (
     <>
-      <Routes>
+      <Switch>
         {/* Public Routes */}
         <Route path="/auth/login" exact element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/auth/register" exact element={<PublicRoute><Signup /></PublicRoute>} />
@@ -37,19 +43,19 @@ const App = () => {
         />
 
         {/* Private Routes */}
-        <Route
+        {/* <Route
           exact
           path="/*"
           element={
             <PrivateRoute>
               <MainLayout />
-            </PrivateRoute>
+             </PrivateRoute>
           }
-        />
-
+        />  */}
+ <PrivateRoute path="/" component={MainLayout} />
         {/* unknown Routes */}
-        <Route path="*" element={<Pagenotfound />} />
-      </Routes>
+        {/* <Route  path="*" element={<Pagenotfound />} /> */}
+      </Switch>
       
     </>
   );

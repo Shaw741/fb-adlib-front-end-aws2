@@ -17,7 +17,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUp } from "../../services/index";
@@ -28,9 +28,11 @@ import fbaddlogo from "../../assets/fbaddlogo.png"
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useHistory } from "react-router-dom";
 const Signup = () => {
   const global = globalStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [errormessage, setErrormessage] = useState("")
   const [values, setValues] = React.useState({
@@ -71,7 +73,7 @@ const Signup = () => {
         setLoading(false)
         setErrormessage("The email address is already in used")
       } else if (response.success) {
-        navigate("/auth/login");
+        history.push("/auth/login");
       }
     } catch {
       setLoading(false);
@@ -114,7 +116,7 @@ const Signup = () => {
                     Already have an account?{" "}
                     <span
                       style={{ color: "#00CBFF", cursor: "pointer", marginLeft: "5px" }}
-                      onClick={() => navigate("/auth/login")}
+                      onClick={() => history.push("/auth/login")}
                     >
                       Sign in
                     </span>

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import Backtologin from "../../assets/Backtologinicon.svg";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import { forgotPassword, isAlive } from "../../services/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -31,7 +31,8 @@ const ForgetPassword = () => {
   const classes = useStyles();
   const global = globalStyles();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -54,7 +55,7 @@ const ForgetPassword = () => {
     const res = await isAlive();
     if (res.success && res?.data?.data) {
       if (res?.data?.data?.is_alive === true) {
-        navigate("/");
+        history.push("/");
       }
     }
   };
@@ -142,7 +143,7 @@ const ForgetPassword = () => {
                   <Typography
                     variant="h6"
                     sx={{ cursor: "pointer" }}
-                    onClick={() => navigate("/auth/login")}
+                    onClick={() => history.push("/auth/login")}
                   >
                     Back to log in
                   </Typography>

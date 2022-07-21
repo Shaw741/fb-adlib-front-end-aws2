@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Stack } from "@mui/material";
 import logout from "../assets/Logout.svg";
@@ -118,7 +118,8 @@ const sideBarMenuItems = {
 
 export const CustomSidebar = ({ isOpen }) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [selectedMenuItem, setSelectedMenuItem] = useState(
     sideBarMenuItems.ADLIBSDATABASE
   );
@@ -134,7 +135,7 @@ export const CustomSidebar = ({ isOpen }) => {
   const userLogout = async () => {
     logoutUser().then((data) => {
       localStorage.setItem("is_alive", false);
-      navigate("/auth/login");
+      history.push("/auth/login");
     }, (error) => {
       console.log("Error While LogOut", error)
     });
@@ -156,7 +157,7 @@ export const CustomSidebar = ({ isOpen }) => {
       <Drawer variant="permanent" open={isOpen}>
         <Stack sx={{ height: "100%" }}>
           <Box
-            onClick={() => navigate("/")}
+            onClick={() => history.push("/")}
             sx={{
               display: "flex",
               marginLeft: "7.5px",
@@ -179,7 +180,7 @@ export const CustomSidebar = ({ isOpen }) => {
               }
               onClick={() => {
                 setSelectedMenuItem(sideBarMenuItems.ADLIBSDATABASE);
-                navigate("/");
+                history.push("/");
               }}
             >
               <Stack
@@ -207,7 +208,7 @@ export const CustomSidebar = ({ isOpen }) => {
               }
               onClick={() => {
                 setSelectedMenuItem(sideBarMenuItems.SAVEDADS);
-                navigate("/savedAds");
+                history.push("/savedAds");
               }}
             >
               <Stack
@@ -234,7 +235,7 @@ export const CustomSidebar = ({ isOpen }) => {
               }
               onClick={() => {
                 setSelectedMenuItem(sideBarMenuItems.SUPPORT);
-                navigate("/ContactSupport");
+                history.push("/ContactSupport");
               }}
             >
               <Stack

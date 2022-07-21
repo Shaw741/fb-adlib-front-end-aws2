@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-computed-key */
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -168,8 +168,8 @@ const useStyles = makeStyles((theme) => ({
 const ThumbNailBox = ({ adInfo, index, deleteId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
+  const history = useHistory();
   return (
     <Grid item lg={3} md={4} xs={5} key={index}>
       <Stack
@@ -396,7 +396,7 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
           }}
           onClick={() => {
             dispatch(srtPostionForScrollValueStart(window.pageYOffset));
-            navigate(`/adDeatails/${adInfo.adID}`);
+            history.push(`/adDeatails/${adInfo.adID}`);
           }}
         >
           <b>See Details</b>

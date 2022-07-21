@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import viss from "../assets/viss.svg";
 import mastercard from "../assets/master-card.svg"
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import { updateAccountSettingsStart } from "../redux/ducks/accountSettings";
 import useStyles from "../css/mediapage";
 import { cancelusersubcription, fetch_payment_method } from "../services";
@@ -27,7 +27,8 @@ const LoadingFor = {
 function AccountSettings() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [subLoading, setSubLoading] = useState(false);
 
   const { accountSettings, loading } = useSelector(
@@ -476,7 +477,7 @@ function AccountSettings() {
                               onClick={
                                 subscriptionData?.data?.status === "Canceled" ||
                                   subscriptionData?.data?.status === "Inactive"
-                                  ? () => navigate("/plans")
+                                  ? () => history.push("/plans")
                                   : cancelSubscription
                               }
                             >

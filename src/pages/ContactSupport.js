@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Button, CircularProgress, Grid, InputBase } from "@mui/material";
 import { Box } from "@mui/system";
@@ -9,7 +9,8 @@ import useStyles from "../css/mediapage";
 
 const ContactSupport = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -28,7 +29,7 @@ const ContactSupport = () => {
     } else {
       setLoading(false);
       console.log("Failure!!", response);
-      navigate("/");
+      history.push("/");
     }
   };
 

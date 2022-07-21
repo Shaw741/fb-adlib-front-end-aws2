@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 import settings from "../assets/settings.svg";
 import logout from "../assets/Logout.svg";
 import contactUs from "../assets/contactUs.svg";
@@ -54,7 +54,8 @@ export const CustomAppBar = ({ isOpen, setIsOpen }) => {
     { name: "Logout", icon: logout, url: "/auth/login" }
   ];
   const [isMenuOptionActive, setIsMenuOptionActive] = React.useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [anchoerEL, setAnchoerEL] = React.useState();
   const handleOpenMenu = (e) => {
     setAnchoerEL(e.currentTarget);
@@ -68,7 +69,8 @@ export const CustomAppBar = ({ isOpen, setIsOpen }) => {
       // dispatch(setIsAlive(false));
       localStorage.setItem("is_alive", false);
       handleCloseMenu();
-      navigate("/auth/login");
+      history.push("/auth/login");
+      
     }, (error)=>{
       handleCloseMenu();
       console.log("Error While LogOut", error)
@@ -197,7 +199,7 @@ export const CustomAppBar = ({ isOpen, setIsOpen }) => {
                               userLogout();
                             }else{
                               handleCloseMenu();
-                              navigate(item.url);
+                              history.push(item.url);
                             }
                             setIsMenuOptionActive(window.location.pathname);
                           }}

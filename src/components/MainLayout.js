@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
+// import { Routes } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Addlibrarydatabase from "../pages/AdlibraryDatabase";
 import SavedAds from "../pages/SavedAds";
@@ -23,6 +23,13 @@ import { getSetCatSatus } from "../redux/ducks/filtered_Data";
 import ActiveSubScription from "../ActiveSubScription";
 import InActiveSubScription from "../InActiveSubScription";
 import { CircularProgress } from "@mui/material";
+// import { Route } from "react-router";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -39,12 +46,14 @@ const MainLayout = () => {
   const [isOpen, setIsOpen] = React.useState(true);
 
   useEffect(() => {
+    console.log("???????????????????????????????????????????????????????????")
     dispatch(loadSubscriptionStart());
     dispatch(loadMediaStart());
     dispatch(loadSavedAdsStart());    
     dispatch(loadAccountSettingsStart());
     dispatch(getSetCatSatus());
-  },[dispatch]);
+    console.log("???????????????????????????????????????????????????????????")
+  },[]);
 
   // useEffect(()=>{
   //   dispatch(loadSavedAdsClientSideStart(savedAds))
@@ -75,7 +84,7 @@ const MainLayout = () => {
               }}
             />
           </Box> :
-          <Routes>
+          <Switch>
             <Route exact path="/" element={<ActiveSubScription><Addlibrarydatabase /></ActiveSubScription>} />
             <Route exact path="/savedAds" element={<ActiveSubScription><SavedAds /></ActiveSubScription>} />
             <Route exact path="/contactSupport" element={<ContactSupport />} />
@@ -90,7 +99,7 @@ const MainLayout = () => {
               element={<ActiveSubScription><AdDeatailsTabs /></ActiveSubScription>}
             />
             <Route exact path="/plans" element={<InActiveSubScription><Payment /></InActiveSubScription>} />
-          </Routes>}
+          </Switch>}
         </Box>
       </Box>
     </>

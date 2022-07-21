@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { Grid } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { login } from "../../services/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,7 +28,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const Login = () => {
   const global = globalStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [errormessage, setErrormessage] = useState("")
   const [values, setValues] = React.useState({
@@ -60,7 +61,7 @@ const Login = () => {
     setLoading(true);
     login(data).then((res) => {
       localStorage.setItem("is_alive", true);
-      navigate("/");
+      history.push("/");
     }, (error) => {
       localStorage.setItem("is_alive", false);
       setLoading(false);
@@ -109,7 +110,7 @@ const Login = () => {
                   <Typography pt={1}>
                     Don't have an account ?{" "}
                     <span
-                      onClick={() => navigate("/auth/register")}
+                      onClick={() => history.push("/auth/register")}
                       style={{ color: "#00CBFF", cursor: "pointer" }}
                     >
                       Register
@@ -143,7 +144,7 @@ const Login = () => {
                       </Grid>
                       <Grid item xs={12} display="flex">
                         <Box
-                          onClick={() => navigate("/auth/forgot-password")}
+                          onClick={() => history.push("/auth/forgot-password")}
                           sx={{ marginLeft: "auto" }}
                         >
                           <Typography

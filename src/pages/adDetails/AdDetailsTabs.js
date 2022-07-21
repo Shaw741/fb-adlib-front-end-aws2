@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {  useHistory, useParams } from "react-router-dom";
 import AllAds from "./AllAds";
 import AdDeatails from "./adDeatails";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSubAllMediaStart } from "../../redux/ducks/subAllAds";
 import LeftArrow from "../../assets/LeftArrow.svg";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 function AdDeatailsTabs() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
   // const history = useHistory();
   // const { itemId, otherParam } = route.params;
@@ -75,7 +83,7 @@ function AdDeatailsTabs() {
         <Box
           onClick={() => {
             // history.goBack();
-            navigate("/");
+            history.push("/");
           }}
           sx={{ cursor: "pointer" }}
         >
@@ -107,7 +115,7 @@ function AdDeatailsTabs() {
               }}
               onClick={() => {
                 setIsActiveTab(adDetailsTabs.ADOVERVIEW);
-                navigate("");
+                history.push("");
               }}
             >
               Ad Overview
@@ -123,7 +131,7 @@ function AdDeatailsTabs() {
               }}
               onClick={() => {
                 setIsActiveTab(adDetailsTabs.ALLADS);
-                navigate("allAds");
+                history.push("allAds");
               }}
             >
               All Ads
@@ -131,14 +139,14 @@ function AdDeatailsTabs() {
           </Stack>
         </Box>
       </Box>
-      <Routes>
+      <Router>
         <Route
           exact
           path=""
           element={<AdDeatails ThumbnailData={adDetail} />}
         />
         <Route exact path="allAds" element={<AllAds />} />
-      </Routes>
+      </Router>
     </>
   );
 }
