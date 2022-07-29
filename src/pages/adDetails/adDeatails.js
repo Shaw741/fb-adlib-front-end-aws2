@@ -4,7 +4,8 @@ import { Grid, Box, Typography, Button, Stack, Avatar } from "@mui/material";
 import Firsrcardimg from "../../assets/FirstCardImg.svg";
 import facebook from "../../assets/facebook.svg";
 import instragram from "../../assets/instragram.svg";
-import MyChart from "../../components/MyChart";
+import MyChart from "../../components/linemy";
+// import MyChart from "../../components/MyChart";
 const ReadMore = ({ children }) => {
   const text = children;
   const [isReadMore, setIsReadMore] = React.useState(true);
@@ -25,6 +26,10 @@ const ReadMore = ({ children }) => {
     </p>
   );
 };
+// import MyChart from "../../components/linemy";
+// import MyChart from "../../components/MyChart";
+// import MyCharttt from "../../components/linemy";
+
 
 function AdDeatails({ ThumbnailData }) {
   const classes = useStyles();

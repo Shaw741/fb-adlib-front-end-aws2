@@ -29,7 +29,7 @@ import {
   // clearSingleFilteredDataStart,
   FilterAfterSearchStart,
   loadFilteredDataStart,
-  putFilteredDataStart,
+  // putFilteredDataStart,
   // putFilteredDataStart,
   searchStart,
   SortvalueStart,
@@ -47,6 +47,7 @@ import {
 import InfiniteScroll from "react-infinite-scroll-component";
 import { clearSingleFilteredDataStart } from "../redux/ducks/appliedFilterData";
 import { FadeLoader } from "react-spinners";
+import { useLocation } from "react-router-dom";
 // import { clearSingleFilteredDataStart } from "../redux/ducks/filterData";
 // import MyGraph from "../components/Graph";
 
@@ -150,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
 const Addlibrarydatabase = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { state } = useLocation();
   const {
     search_loading,
     allMediaAdsData,
@@ -235,14 +237,13 @@ const Addlibrarydatabase = () => {
     });
   }, [postionYoffset]);
   console.log(allMediaAdsData?.length, "+++++++++++++++++++++++");
-  
-  
+
   useEffect(() => {
-    if (allMediaAdsData?.length) {
-      dispatch(loadFilteredDataStart());
-    } else {
-      dispatch(putFilteredDataStart({ data: allMediaAdsData }));
-    }
+    // if (allMediaAdsData?.length) {
+    //   dispatch(loadFilteredDataStart());
+    // } else {
+    //   dispatch(putFilteredDataStart({ data: allMediaAdsData }));
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -380,7 +381,7 @@ const Addlibrarydatabase = () => {
           />
         </Grid>
 
-        <Grid item>
+        <Grid item sx={{width:"100%"}}>
           <Box
             sx={{
               display: "flex",
@@ -407,25 +408,21 @@ const Addlibrarydatabase = () => {
             hasMore={true}
             loader={
               <div
-                style={{
-                  // opacity:0.5,
+                style={{                  
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  textAlign: "center",
+                  textAlign: "center",width:"100%"
                 }}
               >
-                {<h4>Loading...</h4>}
+                {loading?<h4>Loading...</h4>:null}
               </div>
             }
           >
             <Grid
               item
               sx={{
-                opacity:
-                page_index === 0 && loading
-                    ? 0.5
-                    : 1,
+                opacity: page_index === 0 && loading ? 0.5 : 1,
                 width: "100%",
               }}
             >

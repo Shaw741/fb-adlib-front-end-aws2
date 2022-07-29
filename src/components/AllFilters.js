@@ -378,7 +378,7 @@ function AllFilters(props) {
   };
 
   useEffect(() => {
-    if(props.loading === false)
+    // if(props.loading === false || appliedFilters.StartRunningDate.enddate)
      callFilters();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedFilters, SavedAppliedFilters]);
@@ -500,15 +500,24 @@ function AllFilters(props) {
             props?.sortDetail?.type === "false"
               ? props?.sortDetail?.type
               : null,
-          keywords:
+              keywords:
             props?.search_type === "All these words"
-              ? document.getElementById("searchbar").value ==="" ? props?.search.split(" "):null //document.getElementById("searchbar").value.split(" ")
+              ? props?.search!==""?props?.search.split(" "):null //document.getElementById("searchbar").value.split(" ")
               : null,
 
           phrase:
             props.search_type === "Exact Phrase"
-              ? document.getElementById("searchbar").value ==="" ?props?.search.split(","):null //document.getElementById("searchbar").value.split(",")
+              ? props?.search!==""? props?.search.split(","):null //document.getElementById("searchbar").value.split(",")
               : null,
+          // keywords:
+          //   props?.search_type === "All these words"
+          //     ? document.getElementById("searchbar").value ==="" ? props?.search.split(" "):null //document.getElementById("searchbar").value.split(" ")
+          //     : null,
+
+          // phrase:
+          //   props.search_type === "Exact Phrase"
+          //     ? document.getElementById("searchbar").value ==="" ?props?.search.split(","):null //document.getElementById("searchbar").value.split(",")
+          //     : null,
         })
       );
     }
@@ -722,37 +731,37 @@ function AllFilters(props) {
           >
             <DateRange
               id="datepicker"
-              // onClick={(item) => {
+              onClick={(item) => {
 
-              //   if (props.name === "AllAdsPage") {
-              //     dispatch(
-              //       datevalueStart({
-              //         name: "StartRunningDate",
-              //         startdate: format(item.selection.startDate, "yyyy-MM-dd"),
-              //         enddate: format(item.selection.endDate, "yyyy-MM-dd"),
-              //         Message: `running date ${format(
-              //           item.selection.startDate,
-              //           "yyyy-MM-dd"
-              //         )} to ${format(item.selection.endDate, "yyyy-MM-dd")}`,
-              //       })
-              //     );
-              //   } else if (props.name === "SavedPage") {
-              //     dispatch(
-              //       SavedAdsdatevalueStart({
-              //         name: "StartRunningDate",
-              //         startdate: format(item.selection.startDate, "yyyy-MM-dd"),
-              //         enddate: format(item.selection.endDate, "yyyy-MM-dd"),
-              //         Message: `running date ${format(
-              //           item.selection.startDate,
-              //           "yyyy-MM-dd"
-              //         )} to ${format(item.selection.endDate, "yyyy-MM-dd")}`,
-              //         // componentName: props.name,
-              //       })
-              //     );
-              //   }
+                if (props.name === "AllAdsPage") {
+                  dispatch(
+                    datevalueStart({
+                      name: "StartRunningDate",
+                      startdate: format(item.selection.startDate, "yyyy-MM-dd"),
+                      enddate: format(item.selection.endDate, "yyyy-MM-dd"),
+                      Message: `running date ${format(
+                        item.selection.startDate,
+                        "yyyy-MM-dd"
+                      )} to ${format(item.selection.endDate, "yyyy-MM-dd")}`,
+                    })
+                  );
+                } else if (props.name === "SavedPage") {
+                  dispatch(
+                    saveddatevalueStart({
+                      name: "StartRunningDate",
+                      startdate: format(item.selection.startDate, "yyyy-MM-dd"),
+                      enddate: format(item.selection.endDate, "yyyy-MM-dd"),
+                      Message: `running date ${format(
+                        item.selection.startDate,
+                        "yyyy-MM-dd"
+                      )} to ${format(item.selection.endDate, "yyyy-MM-dd")}`,
+                      // componentName: props.name,
+                    })
+                  );
+                }
 
-              //   setRange([item.selection]);
-              // }}
+                setRange([item.selection]);
+              }}
               onChange={(item) => {
                 console.log(item);
                 if (props.name === "AllAdsPage") {

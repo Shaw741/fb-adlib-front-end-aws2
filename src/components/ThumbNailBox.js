@@ -27,8 +27,11 @@ import { createSavedAdsStart,deleteSavedAdsStart} from "../redux/ducks/saveAds_c
 // } from "../redux/ducks/saveAds_clientSide";
 // import pauseButton from "../assets/pauseButton.svg";
 // import { srtPostionForScrollValueStart } from "../redux/ducks/filtered_Data";
-import MyCharttt from "./linemy";
+// import { SingleLineChart } from "./Graph";
+// import MyChart from "./MyChart";
+// import MyCharttt from "./linemy";
 import { srtPostionForScrollValueStart } from "../redux/ducks/mediaAds";
+import MyChart from "./linemy";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -323,7 +326,7 @@ const ThumbNailBox = ({ adInfo, index, deleteId }) => {
         </Grid>
 
         <Box sx={{ marginTop: "20px", marginBottom: "20px", height: "100px" }}>
-          <MyCharttt
+          <MyChart
             chartData={adInfo?.history}
             dataBoxVisiblity={false}
             axisVisiblity={false}

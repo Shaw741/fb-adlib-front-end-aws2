@@ -72,9 +72,9 @@ function* onLoadAllCatSatus() {
 //   yield takeLatest(SEARCH_START, handleGetSearchedPhraseData);
 // }
 
-function* onLoadPhraseSearchedAds() {
-  yield takeLatest(SEARCH_PHRASE_START, handleGetSearchedPhraseData);
-}
+// function* onLoadPhraseSearchedAds() {
+//   yield takeLatest(SEARCH_PHRASE_START, handleGetSearchedPhraseData);
+// }
 
 // function* onLoadSavedAdSearchedAds() {
 //   yield takeLatest(ALL_SAVED_ADS_SEARCH_START, handleGetSavedAdsSearchedData);
@@ -106,7 +106,7 @@ const suballadsSagas = [fork(onLoadSubAllMeida)];
 
 const searchedAdsSagas = [
   // fork(onLoadSearchedAds),
-   fork(onLoadPhraseSearchedAds)
+  //  fork(onLoadPhraseSearchedAds)
 
 ];
 const allCatStatusSagas = [

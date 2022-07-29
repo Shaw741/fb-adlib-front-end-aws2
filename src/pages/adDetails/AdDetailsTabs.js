@@ -37,11 +37,12 @@ function AdDeatailsTabs() {
     }
   });
   useEffect(() => {    
-    if (allMediaAdsData) {      
-      if (subAllMedia[0]?.pageInfo?.name === state.singleAds?.pageInfo?.name) {
-        dispatch(loadSubAllMediaStart({ ad_name: state.SingleAds?.pageInfo?.name }));}
+    // if (allMediaAdsData) {      
+      console.log("1112" +  subAllMedia[0]?.pageInfo?.name+ state.singleAds?.pageInfo?.name)
+      if(subAllMedia[0]?.pageInfo?.name !== state.singleAds?.pageInfo?.name) 
+        dispatch(loadSubAllMediaStart({ ad_name: state.SingleAds?.pageInfo?.name }));//}
       
-    }
+    // }
   }, []);
 
   return (
@@ -57,7 +58,7 @@ function AdDeatailsTabs() {
       >
         <Box
           onClick={() => {
-            navigate("/");
+            navigate("/",{ state: { call: false } });
           }}
           sx={{ cursor: "pointer" }}
         >

@@ -20,7 +20,7 @@ const reducer = combineReducers({
   accountSettings: accountSettingsReducer,
   subAllMedia: subAllMediaReducer,
   savedclienads: savedAdsClienSideReducer,
-  filteredData: FilterDataReducer,
+  // filteredData: FilterDataReducer,
   isAliveData: isAliveReducer,
   subscriptionData: subscriptionReducer,
   appliedFilterData:filterReducer,

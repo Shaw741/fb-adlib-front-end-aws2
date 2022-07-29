@@ -171,7 +171,7 @@ function SortFilter(props) {
     }
   };
   useEffect(() => {    
-    if(props.loading===false)
+    // if(props.loading===false)
     callFilters();
   }, [ props.sortDetail]);
   const handleChangeSortType = (event, newValue) => {
