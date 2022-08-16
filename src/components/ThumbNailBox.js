@@ -35,6 +35,7 @@ import {
 import { setPostionForScrollValueStart } from "../redux/ducks/filteredAds";
 import { setPostionForSubAllAdsToScrollValueStart } from "../redux/ducks/subAllAds";
 import AccessTime from "@mui/icons-material/AccessTime";
+import { ButtonThemeColor } from "../Golbal_variable";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -458,8 +459,8 @@ const ThumbNailBox = ({ adInfo, index }) => {
             >
               <Avatar
                 sx={{
-                  background:
-                    "linear-gradient(45deg, #00CBFF 0%, #72E2FF 100%)",
+                  background:ButtonThemeColor,
+                    // "linear-gradient(45deg, #00CBFF 0%, #72E2FF 100%)",
                   display: "grid",
                   width: "52px",
                   height: "51px",
@@ -617,8 +618,9 @@ const ThumbNailBox = ({ adInfo, index }) => {
             size="small"
             sx={{
               borderRadius: "17px",
-              background:
-                "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+              background:ButtonThemeColor,
+              // background:
+              //   "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
               textTransform: "none",
             }}
             onClick={() => {

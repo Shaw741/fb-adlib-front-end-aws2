@@ -24,6 +24,7 @@ import {
 import { FadeLoader } from "react-spinners";
 import MyChart from "../../components/linemy";
 import Download from "@mui/icons-material/Download";
+import { ButtonThemeColor } from "../../Golbal_variable";
 
 const ReadMore = ({ children }) => {
   const text = children;
@@ -345,8 +346,8 @@ function AdDeatails() {
                   <Grid item xs={12} sm={12} md={12} lg={6}>
                   <Button
                     style={{
-                      background:
-                        "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+                      background:ButtonThemeColor,
+                        // "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
                       borderRadius: 18,
                       textTransform: "none",
                       width: "100%",//"156px",
@@ -391,8 +392,8 @@ function AdDeatails() {
               >
                 <Button
                   style={{
-                    background:
-                      "linear-gradient(200deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
+                    background:ButtonThemeColor,
+                      // "linear-gradient(200deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
                     borderRadius: 30,
                     fontSize: "18px",
                     textTransform: "none",
@@ -445,8 +446,8 @@ function AdDeatails() {
               >
                 <Button
                   style={{
-                    background:
-                      "linear-gradient(200deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
+                    background:ButtonThemeColor,
+                      // "linear-gradient(200deg, #B5EDFF 0%, #00CBFF 29.96%, #6721FF 89.87%, #C8BDFF 104.58%)",
                     borderRadius: 30,
                     fontSize: "18px",
                     textTransform: "none",

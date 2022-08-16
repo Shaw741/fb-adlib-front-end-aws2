@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { contactSupport } from "../services";
 import useStyles from "../css/mediapage";
+import { ButtonThemeColor } from "../Golbal_variable";
 
 const ContactSupport = () => {
   const classes = useStyles();
@@ -169,8 +170,8 @@ const ContactSupport = () => {
                     className={classes.sendbutton}
                     sx={{
                       borderRadius: "15px",
-                      background:
-                        "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+                      background:ButtonThemeColor,
+                        // "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
                       width: {
                         xs: "232px",
                         sm: "120px",

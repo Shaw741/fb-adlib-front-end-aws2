@@ -29,6 +29,7 @@ import { PageNameEnum } from "../utils/enums";
 import { useLocation } from "react-router-dom";
 import GradientButton from "react-linear-gradient-button";
 import filter from "../assets/filter.svg";
+import ResetButton from "./ResetButton";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -912,8 +913,21 @@ function AllFilters(props) {
                     }
                   }}
                   // onChange={(e) => handleAdsCountChange(e.target.value)}
-                />
-                <GradientButton
+                />                
+                <ResetButton onResetFunction={()=>{
+                   pageName === PageNameEnum.AdlibraryDatabase
+                   ? setRangeAdcountValue({
+                       min: 1,
+                       max: allAdsPerams?.maxRanger?.AdCount?.max,
+                     })
+                   : setSavedPageRangeAdcountValue({
+                       min: 1,
+                       max: savedAdsPerams?.maxRanger?.AdCount?.max,
+                     });
+                 handleAdsCountChange([1, 1000], true);
+                 setrangeAnchorEl(null);
+                }}/>
+                {/* <GradientButton
                   gradient={[
                     "rgba(103, 33, 255, 1)",
                     "rgba(0, 203, 255, 1)",
@@ -950,7 +964,7 @@ function AllFilters(props) {
                   >
                     Reset
                   </Typography>
-                </GradientButton>
+                </GradientButton> */}
 
                 {/* <Button
                   // disabled={props.loading}
@@ -1066,7 +1080,11 @@ function AllFilters(props) {
                   alignContent={"center"}
                   justifyContent={"center"}
                 >
-                  <GradientButton
+                  <ResetButton onResetFunction={()=>{
+                    handleChangeStatus("", true);
+                    setAdStatusAnchorel(null);
+                  }}/>
+                  {/* <GradientButton
                     gradient={[
                       "rgba(103, 33, 255, 1)",
                       "rgba(0, 203, 255, 1)",
@@ -1094,7 +1112,7 @@ function AllFilters(props) {
                     >
                       Reset
                     </Typography>
-                  </GradientButton>
+                  </GradientButton> */}
 
                   {/* <Button
                     // disabled={props.loading}
@@ -1348,7 +1366,19 @@ function AllFilters(props) {
                     // handleFacebookLikesChange(e.target.value)
                   }}
                 />
-                <GradientButton
+                <ResetButton onResetFunction={()=>{ pageName === PageNameEnum.AdlibraryDatabase
+                      ? setRangeFacebookValue({
+                          min: 1,
+                          max: allAdsPerams?.maxRanger?.FacebookLikes?.max,
+                        })
+                      : setSavedPageRangeFacebookValue({
+                          min: 1,
+                          max: savedAdsPerams?.maxRanger?.FacebookLikes?.max,
+                        });
+
+                    handleFacebookLikesChange([1, 100000], true);
+                    setFacebookLikeAnchorEl(null);}}/>
+                {/* <GradientButton
                   gradient={[
                     "rgba(103, 33, 255, 1)",
                     "rgba(0, 203, 255, 1)",
@@ -1386,7 +1416,7 @@ function AllFilters(props) {
                   >
                     Reset
                   </Typography>
-                </GradientButton>
+                </GradientButton> */}
                 {/* <Button
                   // disabled={props.loading}
                   variant="outlined"
@@ -1653,6 +1683,19 @@ function AllFilters(props) {
                     // handleInstagramFollowersChange(e.target.value)
                   }}
                 />
+                <ResetButton onResetFunction={()=>{ pageName === PageNameEnum.AdlibraryDatabase
+                      ? setRangeInstragramValue({
+                          min: 1,
+                          max: allAdsPerams?.maxRanger?.InstagramFollowers?.max,
+                        })
+                      : setSavedPageRangeInstragramValue({
+                          min: 1,
+                          max: savedAdsPerams?.maxRanger?.InstagramFollowers
+                            ?.max,
+                        });
+                    handleInstagramFollowersChange([1, 10000], true);
+                    setInstragramFollowerAnchorEl(null);}}/>
+
                 <GradientButton
                   gradient={[
                     "rgba(103, 33, 255, 1)",

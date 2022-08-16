@@ -18,6 +18,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Button from "@mui/material/Button";
+// import "../Golbal_variable";
+import { BgThemeColor, MenuIconColor, SelectedSidebarMenuColor } from "../Golbal_variable";
+
 const useStyles = makeStyles(() => ({
   title: {
     fontFamily: "Neue Haas Grotesk Display Pro",
@@ -46,9 +49,10 @@ const useStyles = makeStyles(() => ({
     texFillColor: "transparent",
   },
   selectedMenu: {
-    background: "linear-gradient(270deg, rgba(0, 203, 255, 0.5) 0%, rgba(0, 203, 255, 0.03) 100%)",
+    background:SelectedSidebarMenuColor,
+      // "linear-gradient(270deg, rgba(0, 203, 255, 0.5) 0%, rgba(0, 203, 255, 0.03) 100%)",
     // borderRight: "4px solid #00C9FD",
-    borderRadius: "32px",    
+    borderRadius: "32px",
   },
   openDrawerItemWrapper: {
     paddingRight: "6px",
@@ -96,9 +100,9 @@ const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     width: 0,
-    display:'none',
+    display: "none",
   },
   flexShrink: 0,
   whiteSpace: "nowrap",
@@ -156,10 +160,7 @@ export const CustomSidebar = ({ isOpen }) => {
       setSelectedMenuItem(sideBarMenuItems.ADLIBSDATABASE);
     } else if (window.location.pathname === `/savedAds`) {
       setSelectedMenuItem(sideBarMenuItems.SAVEDADS);
-    } else if (
-      window.location.pathname.split("/").includes("adDeatails")
-      
-    ) {
+    } else if (window.location.pathname.split("/").includes("adDeatails")) {
       if (currentPage === "/savedAds")
         setSelectedMenuItem(sideBarMenuItems.SAVEDADS);
       else setSelectedMenuItem(sideBarMenuItems.ADLIBSDATABASE);
@@ -173,14 +174,21 @@ export const CustomSidebar = ({ isOpen }) => {
   }, []);
   return (
     <>
-      <Drawer variant="permanent" open={isOpen}>
-        <Stack sx={{ height: "100%"}}>
+      <Drawer
+        variant="permanent"
+        open={isOpen}
+        style={{ backgroundColor: BgThemeColor /*global.themeBackground*/ }}
+      >
+        <Stack
+          sx={{ height: "100%" }}
+          style={{ background: "rgba(0, 40, 56, 1)" }}
+        >
           <Box
             onClick={() => navigate("/")}
             sx={{
               display: "flex",
-              marginLeft:  isOpen ? "7.5px" : "17px",
-              marginRight:2,
+              marginLeft: isOpen ? "7.5px" : "17px",
+              marginRight: 2,
               // display:"flex",
               justifyContent: isOpen ? "center" : "",
               alignItems: isOpen ? "center" : "",
@@ -193,7 +201,7 @@ export const CustomSidebar = ({ isOpen }) => {
                 alt="small-logo"
                 src={fbEyelogo}
                 onClick={() => navigate("/auth/login")}
-                style={{ cursor: "pointer" ,width:"50px"}}
+                style={{ cursor: "pointer", width: "50px" }}
               />
             </Box>
             <Box>
@@ -202,7 +210,7 @@ export const CustomSidebar = ({ isOpen }) => {
                 src={fbEyelogoText}
                 height="20"
                 onClick={() => navigate("/auth/login")}
-                style={{ cursor: "pointer",width:"160px" }}
+                style={{ cursor: "pointer", width: "160px" }}
               />
             </Box>
           </Box>
@@ -212,7 +220,7 @@ export const CustomSidebar = ({ isOpen }) => {
                 ? classes.openDrawerItemWrapper
                 : classes.closeDrawerItemWrapper
             }
-            sx={{ paddingRight:1}}
+            sx={{ paddingRight: 1 }}
           >
             <Box
               sx={{ cursor: "pointer" }}
@@ -233,7 +241,7 @@ export const CustomSidebar = ({ isOpen }) => {
                   isOpen ? classes.openDrawerItem : classes.closeDrawerItem
                 }
               >
-                <svg width={0} height={0}>
+                {/* <svg width={0} height={0}>
                   <linearGradient
                     id="linearColors"
                     x1={1}
@@ -246,16 +254,22 @@ export const CustomSidebar = ({ isOpen }) => {
                     <stop offset={0.3} stopColor="#00CBFF" />
                     <stop offset={0.9} stopColor="#6721FF" />
                   </linearGradient>
-                </svg>
+                </svg> */}
                 <AdLibraryDatabaseIcon
-                  sx={{ fill: selectedMenuItem === sideBarMenuItems.ADLIBSDATABASE ?"url(#linearColors)":'grey' }}
+                  sx={{
+                    
+                    fill:
+                    // selectedMenuItem === sideBarMenuItems.SAVEDADS?
+                     MenuIconColor
+                      // : "grey",
+                  }}
                   // fill={
                   //   selectedMenuItem === sideBarMenuItems.ADLIBSDATABASE
                   //     ? "#00CBFF"
                   //     : "grey"
                   // }
                 />
-                <Typography sx={{ marginLeft: "26px" , fontWeight:500}}>
+                <Typography sx={{ marginLeft: "26px", fontWeight: 500 ,color:MenuIconColor}}>
                   Adilbrary Database
                 </Typography>
               </Stack>
@@ -268,7 +282,7 @@ export const CustomSidebar = ({ isOpen }) => {
                 ? classes.openDrawerItemWrapper
                 : classes.closeDrawerItemWrapper
             }
-            sx={{ paddingRight:1}}
+            sx={{ paddingRight: 1 }}
           >
             <Box
               sx={{
@@ -294,10 +308,17 @@ export const CustomSidebar = ({ isOpen }) => {
                 }
               >
                 <SaveIcon
-                 sx={{ fill: selectedMenuItem === sideBarMenuItems.SAVEDADS ?"url(#linearColors)":'grey' }}
+                  sx={{
+                    fill:
+                      // selectedMenuItem === sideBarMenuItems.SAVEDADS?
+                       MenuIconColor
+                        // : "grey",
+                  }}
                 />
 
-                <Typography sx={{ marginLeft: "26px" , fontWeight:500}}>Saved Ads</Typography>
+                <Typography sx={{ marginLeft: "26px", fontWeight: 500 ,color:MenuIconColor}}>
+                  Saved Ads
+                </Typography>
               </Stack>
             </Box>
           </Box>
@@ -307,7 +328,7 @@ export const CustomSidebar = ({ isOpen }) => {
                 ? classes.openDrawerItemWrapper
                 : classes.closeDrawerItemWrapper
             }
-            sx={{ marginTop: "auto" , paddingRight:1}}
+            sx={{ marginTop: "auto", paddingRight: 1 }}
           >
             <Box
               sx={{
@@ -330,9 +351,14 @@ export const CustomSidebar = ({ isOpen }) => {
                 }
               >
                 <ContactIcon
-                sx={{ fill: selectedMenuItem === sideBarMenuItems.SUPPORT ?"url(#linearColors)":'grey' }}
+                  sx={{
+                    fill:
+                      selectedMenuItem === sideBarMenuItems.SUPPORT
+                        ?MenuIconColor //"url(#linearColors)"
+                        : "grey",
+                  }}
                 />
-                <Typography sx={{ marginLeft: "26px" , fontWeight:500}} >
+                <Typography sx={{ marginLeft: "26px", fontWeight: 500 ,color:MenuIconColor}}>
                   Contact Support
                 </Typography>
               </Stack>
@@ -369,7 +395,16 @@ export const CustomSidebar = ({ isOpen }) => {
                 onClick={handleClickOpen}
               >
                 <img alt="Logout" src={logout} width="17px" />
-                <Typography sx={{ marginLeft: "33px" , fontWeight:500, textTransform:"none"}}> Log Out</Typography>
+                <Typography
+                  sx={{
+                    marginLeft: "33px",
+                    fontWeight: 500,
+                    textTransform: "none",
+                  }}
+                >
+                  {" "}
+                  Log Out
+                </Typography>
               </Stack>
               <Box p={2}>
                 <Dialog

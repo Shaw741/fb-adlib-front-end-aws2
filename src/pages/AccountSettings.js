@@ -25,6 +25,7 @@ import { setSubscription } from "../redux/ducks/subscription";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import { getFaviconEl } from "../utils/getFaviconEl";
+import { ButtonThemeColor } from "../Golbal_variable";
 
 const LoadingFor = {
   PersonalInfo: "personalInfo",
@@ -283,8 +284,8 @@ function AccountSettings() {
                             color="primary"
                             style={{
                               borderRadius: 50,
-                              background:
-                                "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+                              background:ButtonThemeColor,
+                                // "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
                               whiteSpace: "nowrap",
                               width: savebutton ? "auto" : "99%",
                               textTransform:"none",
@@ -506,8 +507,8 @@ function AccountSettings() {
                               color="primary"
                               style={{
                                 borderRadius: 50,
-                                background:
-                                  "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+                                background:ButtonThemeColor,
+                                  // "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
                                 whiteSpace: "nowrap",
                                 width: savebutton ? "auto" : "99%",
                                 textTransform:"none",
@@ -795,8 +796,8 @@ function AccountSettings() {
                     color="primary"
                     style={{
                       borderRadius: 50,
-                      background:
-                        "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
+                      background:ButtonThemeColor,
+                        // "linear-gradient(243.18deg, #B5EDFF 0%, #00CBFF 28.65%, #6721FF 85.94%)",
                       whiteSpace: "nowrap",
                       // justifyContent: "flex-end",
                       textTransform:"none",
