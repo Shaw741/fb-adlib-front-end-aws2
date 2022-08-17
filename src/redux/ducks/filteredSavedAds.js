@@ -21,6 +21,7 @@ export const ADD_TO_SAVED_FILTERED_AD_LOCAL_ERROR =
   export const SAVED_GET_PAGE_POSITION = "SAVED_GET_PAGE_POSITION";
 
   export const SET_CURRENT_PAGINATION_INDEX = "SET_CURRENT_PAGINATION_INDEX";
+  export const SET_PAGINATION_SAVED_ADS = "SET_PAGINATION_SAVED_ADS";
 
 export const addToSavedAdsFilterLocalStart = (adToBeAdded) => ({
   type: ADD_TO_SAVED_FILTERED_AD_LOCAL_START,
@@ -81,11 +82,20 @@ export const setSavedCurrentPaginationIndex = (page) => ({
   payload:page,
 });
 
+export const setSavedCurrentPaginationAds = (page) => ({
+  type: SET_PAGINATION_SAVED_ADS,  
+  payload:page,
+});
+
+
 const initialState = {
   filteredSavedAds: [],
-  savedAdsIds: [],  
+  savedAdsIds: [], 
+  SavedCurrentPage:[],
+  SavedCurrentPageStartPoint:0,
+  SavedCurrentPageEndPoint:4, 
   totalPages:0,
-  paginationIndex:0,
+  paginationIndex:1,
   hasMoreData:true,
   postionOfPage:0,
   loading: false,
@@ -99,6 +109,7 @@ const filteredSavedAdsReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredSavedAds: [],
+        SavedCurrentPage: [],
         savedAdsIds:[],        
         loading: true,   
         hasMoreData:true,   
@@ -110,18 +121,24 @@ const filteredSavedAdsReducer = (state = initialState, action) => {
       };
 
     case LOAD_SAVED_FILTERED_ADS_SUCCESS:
+      console.log("101",action.payload.data.all_ads)
+      console.log("101 first time",action.payload.data.all_ads.slice(state.SavedCurrentPageStartPoint,state.SavedCurrentPageEndPoint))
       return {
         ...state,
         loading: false,
-        filteredSavedAds:action.payload?.error === true ? [] : action.payload?.data,
+        // filteredSavedAds:action.payload?.error === true ? [] : action.payload?.data.all_ads,
+        filteredSavedAds:action.payload?.data.all_ads,
+        totalPages:Math.ceil(action.payload.data.total_ads/4),
         hasMoreData:action.payload?.data?.length < 8 ? false : true,
+        SavedCurrentPage:action.payload.data.all_ads.slice(state.SavedCurrentPageStartPoint,state.SavedCurrentPageEndPoint),
       };
 
     case LOAD_MORE_SAVED_FILTERED_ADS_SUCCESS:
       return {
         ...state,
         loading: false, 
-        filteredSavedAds: action.payload?.error === true ? state.filteredSavedAds : [...state.filteredSavedAds].concat(action.payload),      
+        filteredSavedAds: action.payload?.error === true ? state.filteredSavedAds : [...state.filteredSavedAds].concat(action.payload?.data.all_ads),      
+        totalPages:action.payload.data.total_pages,
         hasMoreData:action.payload?.length < 8 ? false : true,
       };
 
@@ -160,6 +177,16 @@ const filteredSavedAdsReducer = (state = initialState, action) => {
           // [`${action.payload.key}`]:action.payload.data,
           postionOfPage:action.payload
         }
+        case SET_PAGINATION_SAVED_ADS:
+          console.log("101 in redux ",state.filteredSavedAds.slice(action.payload.start,action.payload.end))
+          return {
+            ...state,
+            SavedCurrentPage:state.filteredSavedAds.slice(action.payload.start,action.payload.end),
+            SavedCurrentPageStartPoint:action.payload.start,
+            SavedCurrentPageEndPoint:action.payload.end,
+            paginationIndex:action.payload.currentPage,
+            // totalPages:Math.ceil(state.filteredSavedAds.length/4)
+          };
     default:
       return state;
   }

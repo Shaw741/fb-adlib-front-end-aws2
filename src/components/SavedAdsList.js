@@ -1,5 +1,4 @@
 import { Grid } from "@material-ui/core";
-import InfiniteScroll from "react-infinite-scroll-component";
 import ThumbNailBox from "./ThumbNailBox";
 import { Box, Pagination, Stack, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +6,7 @@ import * as savedAdsPeramsDuck from "../redux/ducks/savedAdsPerams";
 import {
   loadMoresavedFilteredAdsStart,
   loadsavedFilteredAdsStart,
+  setSavedCurrentPaginationAds,
   setSavedCurrentPaginationIndex,
 } from "../redux/ducks/filteredSavedAds";
 import { useSkipInitialEffect } from "../utils/customHooks";
@@ -17,13 +17,20 @@ import { useEffect, useState } from "react";
 const SavedAdsList = () => {
   const dispatch = useDispatch();
   const filteredSavedAds = useSelector((state) => state.filteredSavedAds);
+  const { SavedCurrentPageStartPoint , SavedCurrentPageEndPoint,paginationIndex,SavedCurrentPage} = useSelector((state) => state.filteredSavedAds);
   const savedAdsPerams = useSelector((state) => state.savedAdsPerams);
   const [queryObject, setQueryObject] = useState({});
+  const [pageStart, setPageStart] = useState(0);
+  const [pageEnd, setPageEnd] = useState(2);
+
 
   useEffect(() => {
     console.log("savedAdsPerams :", savedAdsPerams);
   }, [savedAdsPerams]);
-
+ useEffect(()=>{
+  console.log("101 start")
+  SavedCurrentPage?.map((ads, index) => console.log("101",ads.id))
+ })
   useSkipInitialEffect(()=>{
     const queryObject = {
       startdate: savedAdsPerams?.appliedFilters?.StartRunningDate?.startdate,
@@ -89,6 +96,7 @@ const SavedAdsList = () => {
         savedAdsPerams?.searchBarData.length  ? savedAdsPerams?.searchType === "Exact Phrase"
             ? savedAdsPerams?.searchBarData.split(",")
             : null:null,
+            number_of_pagead: 2,
     };
     setQueryObject(queryObject);
   },[
@@ -133,6 +141,7 @@ const SavedAdsList = () => {
 
   useEffect(()=>{
     window.scrollTo(0,filteredSavedAds.postionOfPage);
+    dispatch(setSavedCurrentPaginationAds({start:0,end:4,currentPage:1}))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -167,7 +176,7 @@ const SavedAdsList = () => {
           }}
         >
           {filteredSavedAds?.filteredSavedAds?.length !== 0 &&
-            filteredSavedAds?.filteredSavedAds?.map((ads, index) => (
+            SavedCurrentPage.map((ads, index) => (
               <ThumbNailBox adInfo={ads} index={index} key={index} />
             ))}
           {filteredSavedAds?.filteredSavedAds?.length === 0 &&
@@ -195,15 +204,28 @@ const SavedAdsList = () => {
        <Pagination
           count={filteredSavedAds?.totalPages}
           size={"large"}           
-          page={filteredSavedAds?.paginationIndex+1}
+          // page={paginationIndex}                    
           onChange={(e, p) => {
+            console.log("101 ----p",p,"------------------- p-1",(p-1),"p+2",(p+2));
+            if(p===1){
+              dispatch(setSavedCurrentPaginationAds({start:0,end:4,currentPage:p}))
+            }else
+            {dispatch(setSavedCurrentPaginationAds({start:((p-1)*4),end:(p*4),currentPage:p}))}
+            // setPageStart(()=>p+1)
+            // setPageEnd(()=>p+3)
             //console.log("9909",e)
-            dispatch(setSavedCurrentPaginationIndex(p-1))
-            dispatch(
-              savedAdsPeramsDuck.setSavedAdsPageIndex(
-                savedAdsPerams?.pageIndex + 1
-              )
-            )
+            // dispatch(setSavedCurrentPaginationIndex(p-1))
+            // dispatch(
+            //   loadMoresavedFilteredAdsStart({
+            //     ...queryObject,
+            //     page_index: p-1,
+            //   })
+            // );
+            // dispatch(
+            //   savedAdsPeramsDuck.setSavedAdsPageIndex(
+            //     p - 1
+            //   )
+            // )
           }}/>
     </Box>
   );

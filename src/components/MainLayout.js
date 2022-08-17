@@ -56,13 +56,14 @@ const MainLayout = () => {
       })
     );
     dispatch(
-      loadsavedFilteredAdsStart({
-        page_index: 0,
-        sort_by: "lastUpdatedTime",
-        order_by: "asc",
-        number_of_pagead: 12,
-      })
+      loadsavedFilteredAdsStart(
+        // page_index: 0,
+        // sort_by: "lastUpdatedTime",
+        // order_by: "asc",
+        // number_of_pagead: 2,
+      )
     );
+    
     dispatch(loadAccountSettingsStart());
     dispatch(getButtonTypes());
   }, [dispatch]);
